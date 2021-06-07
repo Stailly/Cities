@@ -7,10 +7,11 @@ public class City {
     private String name;
     private String region;
     private String district;
-    private long population;
+    private int population;
     private int foundation;
 
-    public City(String name, String region, String district, long population, int foundation) {
+    public City(int id, String name, String region, String district, int population, int foundation) {
+        this.id = id;
         this.name = name;
         this.region = region;
         this.district = district;
@@ -50,7 +51,7 @@ public class City {
         this.district = district;
     }
 
-    public long getPopulation() {
+    public int getPopulation() {
         return population;
     }
 
