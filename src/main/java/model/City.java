@@ -7,10 +7,11 @@ public class City {
     private String name;
     private String region;
     private String district;
-    private long population;
+    private int population;
     private int foundation;
 
-    public City(String name, String region, String district, long population, int foundation) {
+    public City(int id, String name, String region, String district, int population, int foundation) {
+        this.id = id;
         this.name = name;
         this.region = region;
         this.district = district;
@@ -50,7 +51,7 @@ public class City {
         this.district = district;
     }
 
-    public long getPopulation() {
+    public int getPopulation() {
         return population;
     }
 
@@ -71,7 +72,7 @@ public class City {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         City city = (City) o;
-        return id == city.id && population == city.population && foundation == city.foundation && Objects.equals(name, city.name) && Objects.equals(region, city.region) && Objects.equals(district, city.district);
+        return id == city.id && population == city.population && foundation == city.foundation && name.equals(city.name) && region.equals(city.region) && district.equals(city.district);
     }
 
     @Override
@@ -81,7 +82,7 @@ public class City {
 
     @Override
     public String toString() {
-        return "model.City{" +
+        return "City{" +
                 "name='" + name + '\'' +
                 ", region='" + region + '\'' +
                 ", district='" + district + '\'' +
