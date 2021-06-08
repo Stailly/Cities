@@ -72,7 +72,7 @@ public class City {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         City city = (City) o;
-        return id == city.id && population == city.population && foundation == city.foundation && Objects.equals(name, city.name) && Objects.equals(region, city.region) && Objects.equals(district, city.district);
+        return id == city.id && population == city.population && foundation == city.foundation && name.equals(city.name) && region.equals(city.region) && district.equals(city.district);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class City {
 
     @Override
     public String toString() {
-        return "model.City{" +
+        return "City{" +
                 "name='" + name + '\'' +
                 ", region='" + region + '\'' +
                 ", district='" + district + '\'' +

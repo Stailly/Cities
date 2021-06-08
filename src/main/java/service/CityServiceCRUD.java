@@ -28,23 +28,29 @@ public class CityServiceCRUD {
 
     public List<City> getAll() {
         List<City> cities = new ArrayList<>();
+        int count = counter();
+        for (int i = 0; i < count; i++) {
+            City city = get(i);
+            if (city != null) {
+                cities.add(city);
+            }
+        }
+        return cities;
+    }
+
+    public int counter() {
         try (Connection connection = JDBCUtils.getConnection();
              Statement statement = connection.createStatement()) {
             statement.execute(COUNT);
             ResultSet rs = statement.getResultSet();
             rs.next();
-            int count = rs.getInt("count");
-            for (int i = 0; i < count; i++) {
-                City city = get(i);
-                if (city != null) {
-                    cities.add(city);
-                }
-            }
+            return rs.getInt("count");
         } catch (SQLException e) {
             JDBCUtils.printSQLException(e);
         }
-        return cities;
+        return -1;
     }
+
 
     public void save(City city) {
         try (Connection connection = JDBCUtils.getConnection();
@@ -55,11 +61,13 @@ public class CityServiceCRUD {
             statement.setString(4, city.getDistrict());
             statement.setInt(5, city.getPopulation());
             statement.setInt(6, city.getFoundation());
+            statement.executeUpdate();
         } catch (SQLException e) {
             JDBCUtils.printSQLException(e);
         }
     }
-    public void update( City city) {
+
+    public void update(City city) {
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ALL_SQL)) {
             preparedStatement.setString(1, city.getName());
